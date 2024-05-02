@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMBStorage", "SMBStorage\SMBStorage.csproj", "{C8E149B0-5E70-4AD9-8AAA-190EAD237538}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8E149B0-5E70-4AD9-8AAA-190EAD237538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8E149B0-5E70-4AD9-8AAA-190EAD237538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8E149B0-5E70-4AD9-8AAA-190EAD237538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8E149B0-5E70-4AD9-8AAA-190EAD237538}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F3E48BF-3209-4F79-9B58-8CAB047F6A4E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.csproj.AssemblyReference.cache
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.csproj.CoreCompileInputs.cache
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\SMBStorage.dll
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\SMBStorage.pdb
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\TcPluginBase.dll
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\TcPluginBase.pdb
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\TcPluginBase.xml
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.csproj.CopyComplete
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.dll
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.pdb
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\SMBLibrary.dll
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\bin\Debug\Utilities.dll
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.EditStorageForm.resources
+C:\Users\dkxce\source\repos2\TCFsSMBStorage\SMBStorage\obj\Debug\SMBStorage.csproj.GenerateResource.cache

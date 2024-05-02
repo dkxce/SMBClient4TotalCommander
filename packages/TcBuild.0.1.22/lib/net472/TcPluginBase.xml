@@ -1,0 +1,656 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TcPluginBase</name>
+    </assembly>
+    <members>
+        <member name="F:TcPluginBase.CryptResult.OK">
+            <summary>Success.</summary>
+        </member>
+        <member name="F:TcPluginBase.CryptResult.PasswordNotFound">
+            <summary>Password not found in password store.</summary>
+        </member>
+        <member name="F:TcPluginBase.CryptResult.NoMasterPassword">
+            <summary>No master password entered yet.</summary>
+        </member>
+        <member name="F:TcPluginBase.CryptResult.Failed">
+            <summary>Encrypt/Decrypt failed.</summary>
+        </member>
+        <member name="F:TcPluginBase.CryptResult.WriteError">
+            <summary>Could not write password to password store.</summary>
+        </member>
+        <member name="T:TcPluginBase.PluginClassPlaceholder">
+            <summary>
+            A placeholder which will be replaced by the actual Plugin implementation
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.TcMethodAttribute">
+            <summary>
+            Used to mark methods that can be omitted by the TcBuilder
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.FindData">
+            <summary> Used as parameter type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.FindFirst(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.FindData@)"/> and <see cref="M:TcPluginBase.FileSystem.FsPlugin.FindNext(System.Object@,TcPluginBase.FileSystem.FindData@)"/> methods </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FindData.FileName">
+            <summary> Local file name relative to the directory (without the path) </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FindData.Attributes">
+            <summary> File attributes. Use at least the <see cref="F:System.IO.FileAttributes.Directory"/> flag to distinguish between files and directories. Links should be returned as files. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FindData.FileSize">
+            <summary> The file size </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FindData.CreationTime">
+            <summary> Currently unused. If available, set to the time when the file was created. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FindData.LastAccessTime">
+            <summary> Currently unused. If available, set to the time when the file was last accessed. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FindData.LastWriteTime">
+            <summary> Time stamp shown in the Total Commander file list, and copied with files. <c>null</c> for files which don't have a time </summary>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsConnection.Connect">
+            <summary>
+            Calling <see cref="M:TcPluginBase.FileSystem.FsConnection.Connect"/> show the FTP connections toolbar in Total Commander,
+            and lets TC listen for log messages. Total Commander can show these messages in the log window (ftp toolbar) and write them to a log file.
+            <para> Call this if your file system requires explicit disconnection. </para>
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsConnection.WriteStatus(System.String)">
+            <summary>
+            Can be used to log messages to Total Commander.
+            </summary>
+            <remarks>You must <see cref="M:TcPluginBase.FileSystem.FsConnection.Connect"/> to a <see cref="P:TcPluginBase.FileSystem.FsConnection.ConnectionRoot"/> for this to work!</remarks>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsConnection.LogError(System.String)">
+            <summary>
+            Can be used to log errors to Total Commander.
+            </summary>
+            <remarks>You must <see cref="M:TcPluginBase.FileSystem.FsConnection.Connect"/> to a <see cref="P:TcPluginBase.FileSystem.FsConnection.ConnectionRoot"/> for this to work!</remarks>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.FsBackgroundFlags">
+            <summary> Type for property BackgroundFlags used to return value for FsGetBackgroundFlags WFX wrapper method </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FsBackgroundFlags.Download">
+            <summary> Plugin supports downloads in background. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FsBackgroundFlags.Upload">
+            <summary> Plugin supports uploads in background. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FsBackgroundFlags.AskUser">
+            <summary> Plugin requires separate connection for background transfers -> ask user first. </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.CopyFlags">
+            <summary> Used as parameter type for GetFile and PutFile methods </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.CopyFlags.Overwrite">
+            <summary> If set, overwrite any existing file without asking. If not set, simply fail copying.</summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.CopyFlags.Resume">
+            <summary> Resume an aborted or failed transfer.</summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.CopyFlags.Move">
+            <summary> The plugin needs to delete the remote file after uploading </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.CopyFlags.ExistsSameCase">
+            <summary> The remote file exists and has the same case (upper/lowercase) as the local file. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.CopyFlags.ExistsDifferentCase">
+            <summary> The remote file exists and has different case (upper/lowercase) than the local file. </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.ExecResult">
+            <summary> Used as result type for ExecuteOpen, ExecuteProperties, and ExecuteCommand methods </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.ExecResult.Ok">
+            <summary> Command was executed successfully, no further action is needed. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.ExecResult.Error">
+            <summary> Execution failed. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.ExecResult.Yourself">
+            <summary> Total Commander should download the file and execute it locally. </summary>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.ExecResult.SymLink(TcPluginBase.FileSystem.RemotePath)">
+            <summary> It was a (symbolic) link or .lnk file pointing to another file or directory. </summary>
+            <param name="symlinkTarget">The file or directory where the symlink points to.</param>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.ExtractIconFlags">
+            <summary> Used as parameter type for ExtractCustomIcon method </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.ExtractIconFlags.Small">
+            <summary> Requests the small 16x16 icon. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.ExtractIconFlags.Background">
+            <summary> The function is called from the background thread. </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.ExtractIconResult">
+            <summary> Used as result type for ExtractCustomIcon method </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.ExtractIconResult.UseDefault">
+            <summary> No icon is returned. Total Commander should show the default icon for this file type. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.ExtractIconResult.Delayed">
+            <summary>
+            This return value is only valid if <see cref="F:TcPluginBase.FileSystem.ExtractIconFlags.Background"/> was NOT set. It tells the calling app to show a default icon, and request the true icon in a background thread. See remarks.
+            </summary>
+            <remarks>
+            If you return <see cref="P:TcPluginBase.FileSystem.ExtractIconResult.Delayed"/>, <see cref="M:TcPluginBase.FileSystem.FsPlugin.ExtractCustomIcon(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.ExtractIconFlags)"/> will be called again from a background thread at a later time.
+            A critical section is used by Total Commander to ensure that <see cref="M:TcPluginBase.FileSystem.FsPlugin.ExtractCustomIcon(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.ExtractIconFlags)"/> is never entered twice at the same time.
+            This return value should be used for icons which take a while to extract, e.g. EXE icons. In the FsPlugin sample plugin,
+            the drive icons are returned immediately (because they are stored in the plugin itself), but the EXE icons are loaded with a delay.
+            If the user turns off background loading of icons, the function will be called in the foreground with the <see cref="F:TcPluginBase.FileSystem.ExtractIconFlags.Background"/> flag.
+            </remarks>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.ExtractIconResult.Extracted(System.Drawing.Icon,System.String)">
+            <summary>
+            The icon must NOT be freed by Total Commander, e.g. because it was loaded with LoadIcon, or the DLL handles destruction of the icon.
+            </summary>
+            <param name="icon"></param>
+            <param name="iconName">Name of the icon. Total Commander can use this to cache the icon</param>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.ExtractIconResult.ExtractedDestroy(System.Drawing.Icon,System.String)">
+            <summary>
+            The icon MUST be destroyed by Total Commander, e.g. because it was created with CreateIcon(), or extracted with ExtractIconEx().
+            </summary>
+            <param name="icon"></param>
+            <param name="iconName">Name of the icon. Total Commander can use this to cache the icon</param>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.ExtractIconResult.LoadFromFile(System.String,TcPluginBase.FileSystem.ExtractIconFlags)">
+            <summary>
+            This attempts to load the Icon from the specified filePath.
+            supply extractFlags to ensure the correct size gets loaded.
+            </summary>
+            <param name="filePath">a local file path (the file MUST exist)</param>
+            <param name="extractFlags"></param>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.FileSystemExitCode">
+            <summary> Used as result type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.GetFile(TcPluginBase.FileSystem.RemotePath,System.String,TcPluginBase.FileSystem.CopyFlags,TcPluginBase.FileSystem.RemoteInfo)"/>, <see cref="M:TcPluginBase.FileSystem.FsPlugin.PutFile(System.String,TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.CopyFlags)"/> and <see cref="M:TcPluginBase.FileSystem.FsPlugin.RenMovFile(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.RemotePath,System.Boolean,System.Boolean,TcPluginBase.FileSystem.RemoteInfo)"/> methods </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.OK">
+            <summary> The file was copied OK. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.FileExists">
+            <summary> The target file (local or remote) already exists, and resume isn't supported. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.FileNotFound">
+            <summary> The source file (local or remote) couldn't be found or opened. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.ReadError">
+            <summary> There was an error reading from the source file (local or remote). </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.WriteError">
+            <summary> There was an error writing to the target file (local or remote), e.g. disk full. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.UserAbort">
+            <summary> Copying was aborted by the user (through ProgressProc). </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.NotSupported">
+            <summary> The operation is not supported (e.g. resume). </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.FileSystemExitCode.ExistsResumeAllowed">
+            <summary> The target file (local or remote) already exists, and resume is supported. Not used for <see cref="M:TcPluginBase.FileSystem.FsPlugin.RenMovFile(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.RemotePath,System.Boolean,System.Boolean,TcPluginBase.FileSystem.RemoteInfo)"/>. </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.LogMsgType">
+            <summary> Used as parameter type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.LogProc(TcPluginBase.FileSystem.LogMsgType,System.String)"/> callback method </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.Connect">
+            <summary> Connect to a file system requiring disconnect. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.Disconnect">
+            <summary> Disconnected successfully. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.Details">
+            <summary> Not so important messages like directory changing. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.TransferComplete">
+            <summary> A file transfer was completed successfully. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.ConnectComplete">
+            <summary> unused </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.ImportantError">
+            <summary> An important error has occured. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.LogMsgType.OperationComplete">
+            <summary> An operation other than a file transfer has completed. </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.PreviewBitmapResult">
+            <summary> Used as result type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.GetPreviewBitmap(TcPluginBase.FileSystem.RemotePath,System.Int32,System.Int32)"/> method </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.PreviewBitmapResult.None">
+            <summary> There is no preview bitmap. </summary>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.PreviewBitmapResult.Extracted(System.Drawing.Bitmap,System.String,System.Boolean)">
+            <summary> The image was extracted and is returned </summary>
+            <param name="bitmap"></param>
+            <param name="bitmapName">Name of the bitmap. Total Commander can use this to cache the bitmap</param>
+            <param name="cache">false to NOT cache the image</param>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.PreviewBitmapResult.ExtractYourself(System.String,System.Boolean)">
+            <summary> Tells the caller to extract the image by itself from bitmapPath. </summary>
+            <param name="bitmapPath">The local path to the bitmap</param>
+            <param name="cache">false to NOT cache the image</param>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.PreviewBitmapResult.ExtractYourselfAndDelete(System.String,System.Boolean)">
+            <summary>
+            Tells Total Commander to extract the image by itself, and then delete the temporary image file.
+            The full local path to the temporary image file needs to be set in temporaryImageFile.
+            The returned bitmap name must not be longer than MAX_PATH. In this case,
+            the plugin downloads the file to TEMP and then asks TC to extract the image.
+            </summary>
+            <param name="temporaryImageFile"></param>
+            <param name="cache">false to NOT cache the image</param>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.RequestType">
+            <summary> Used as parameter type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.RequestProc(TcPluginBase.FileSystem.RequestType,System.String,System.String,System.String@,System.Int32)"/> callback method </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.InfoOperation">
+            <summary> Used as parameter type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.StatusInfo(System.String,TcPluginBase.FileSystem.InfoStartEnd,TcPluginBase.FileSystem.InfoOperation)"/> method </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.List">
+            <summary> Retrieve a directory listing. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.GetSingle">
+            <summary> Get a single file from the plugin file system. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.GetMulti">
+            <summary> Get multiple files, may include subdirs. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.PutSingle">
+            <summary> Put a single file to the plugin file system. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.PutMulti">
+            <summary> Put multiple files, may include subdirs. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.RenMovSingle">
+            <summary> Rename/Move/Remote copy a single file. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.RenMovMulti">
+            <summary> RenMov multiple files, may include subdirs. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.Delete">
+            <summary> Delete multiple files, may include subdirs. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.Attributes">
+            <summary> Change attributes/times, may include subdirs. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.MkDir">
+            <summary> Create a single directory. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.Exec">
+            <summary> Start a single remote item, or a command line. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.CalcSize">
+            <summary> Calculating size of subdir (user pressed SPACE). </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.Search">
+            <summary> Searching for file names only (using FsFindFirst/NextFile/Close). </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.SearchText">
+            <summary> Searching for file contents (using also FsGetFile() calls). </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.SyncSearch">
+            <summary> Synchronize dirs searches subdirs for info. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.SyncGet">
+            <summary> Synchronize: Downloading files from plugin. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.SyncPut">
+            <summary> Synchronize: Uploading files to plugin. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.SyncDelete">
+            <summary> Synchronize: Deleting files from plugin. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.GetMultiThread">
+            <summary> Get multiple files, may include subdirs. Executes in background thread. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoOperation.PutMultiThread">
+            <summary> Put multiple files, may include subdirs. Executes in background thread. </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.InfoStartEnd">
+            <summary> Used as parameter type for <see cref="M:TcPluginBase.FileSystem.FsPlugin.StatusInfo(System.String,TcPluginBase.FileSystem.InfoStartEnd,TcPluginBase.FileSystem.InfoOperation)"/> method </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoStartEnd.Start">
+            <summary> Operation starts. </summary>
+        </member>
+        <member name="F:TcPluginBase.FileSystem.InfoStartEnd.End">
+            <summary> Operation has ended. </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.FsPlugin.Password">
+            <summary>
+            Gets set by FsSetCryptCallback
+            You can use it to save and load passwords
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPlugin.FindFirst(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.FindData@)">
+             <summary>
+            
+             </summary>
+             <param name="path"></param>
+             <param name="findData"></param>
+             <exception cref="T:TcPluginBase.FileSystem.NoMoreFilesException"></exception>
+             <returns></returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPlugin.ExtractCustomIcon(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.ExtractIconFlags)">
+            <summary>
+            ExtractCustomIcon is called when a file/directory is displayed in the file list.
+            It can be used to specify a custom icon for that file/directory.
+            This function is new in version 1.1. It requires Total Commander >=5.51, but is ignored by older versions.
+            </summary>
+            <param name="remoteName">This is the full path to the file or directory whose icon is to be retrieved</param>
+            <param name="extractFlags">Flags for the extract operation. A combination of <see cref="T:TcPluginBase.FileSystem.ExtractIconFlags"/></param>
+            <returns><see cref="T:TcPluginBase.FileSystem.ExtractIconResult"/> with the extracted Icon, caching infos or the path to a local file where TC can extract the Icon on its own.</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPlugin.GetPreviewBitmap(TcPluginBase.FileSystem.RemotePath,System.Int32,System.Int32)">
+            <summary>
+            GetPreviewBitmap is called when a file/directory is displayed in thumbnail view.
+            It can be used to return a custom bitmap for that file/directory.
+            This function is new in version 1.4. It requires Total Commander >=7.0, but is ignored by older versions.
+            </summary>
+            <param name="remoteName">This is the full path to the file or directory whose bitmap is to be retrieved.</param>
+            <param name="width">The maximum dimensions of the preview bitmap. If your image is smaller, or has a different side ratio, then you need to return an image which is smaller than these dimensions! See notes below!</param>
+            <param name="height">The maximum dimensions of the preview bitmap. If your image is smaller, or has a different side ratio, then you need to return an image which is smaller than these dimensions! See notes below!</param>
+            <returns><see cref="T:TcPluginBase.FileSystem.PreviewBitmapResult"/> with the extracted Bitmap, caching infos or the path to a local file where TC can extract the bitmap on its own.</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPlugin.GetLocalName(TcPluginBase.FileSystem.RemotePath,System.Int32)">
+            <summary>
+            GetLocalName must not be implemented unless your plugin is a temporary file panel plugin! Temporary file panels just hold links to files on the local file system.
+            </summary>
+            <remarks>
+            If your plugin is a temporary panel plugin, the following functions MUST be thread-safe (can be called from background transfer manager):
+            - GetLocalName
+            - FindFirst
+            - FindNext
+            - FindClose
+                This means that when uploading subdirectories from your plugin to FTP in the background, Total Commander will call these functions in a background thread.If the user continues to work in the foreground, calls to FsFindFirst and FsFindNext may be occuring at the same time! Therefore it's very important to use the search handle to keep temporary information about the search.
+                FsStatusInfo will NOT be called from the background thread!
+            </remarks>
+            <param name="remoteName">Full path to the file name in the plugin namespace, e.g. \somedir\file.ext</param>
+            <param name="maxLen">Maximum number of characters you can return in RemoteName, including the final 0.</param>
+            <returns>Return the path of the file on the local file system, e.g. c:\windows\file.ext or null if it does not point to a local file.</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPlugin.ProgressProc(System.String,System.String,System.Int32)">
+            <summary>
+            <see cref="M:TcPluginBase.FileSystem.FsPlugin.ProgressProc(System.String,System.String,System.Int32)"/> is a callback function, which the plugin can call to show copy progress.
+            The address of this callback function is received through the FsInit() function when the plugin is loaded.
+            </summary>
+            <remarks>
+            <para>
+            You should call this function at least twice in the copy functions FsGetFile(), FsPutFile() and FsRenMovFile(), at the beginning and at the end.
+            If you can't determine the progress, call it with 0% at the beginning and 100% at the end.
+            </para>
+            <para>
+            New in 1.3: During the FsFindFirst/FsFindNext/FsFindClose loop, the plugin may now call the ProgressProc to make a progress dialog appear.
+            This is useful for very slow connections. Don't call ProgressProc for fast connections!
+            The progress dialog will only be shown for normal dir changes, not for compound operations like get/put.
+            The calls to ProgressProc will also be ignored during the first 5 seconds,
+            so the user isn't bothered with a progress dialog on every dir change.
+            </para>
+            </remarks>
+            <param name="source">Name of the source file being copied. Depending on the direction of the operation (Get, Put), this may be a local file name of a name in the plugin file system.</param>
+            <param name="destination">Name to which the file is copied.</param>
+            <param name="percentDone">Percentage of THIS file being copied. Total Commander automatically shows a second percent bar if possible when multiple files are copied.</param>
+            <returns>Total Commander returns <c>true</c> if the user wants to abort copying, and <c>false</c> if the operation can continue.</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPlugin.LogProc(TcPluginBase.FileSystem.LogMsgType,System.String)">
+            <summary>
+            param logText: String which should be logged.
+            When MsgType==MSGTYPE_CONNECT, the string MUST have a specific format:
+            "CONNECT" followed by a single whitespace, then the root of the file system which was connected, without trailing backslash. Example: CONNECT \Filesystem
+            When MsgType==MSGTYPE_TRANSFERCOMPLETE, this parameter should contain both the source and target names, separated by an arrow " -> ", e.g.
+            Download complete: \Filesystem\dir1\file1.txt -> c:\localdir\file1.txt
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.FsPrompt">
+            <summary>
+            FsPrompt wraps calls to RequestProc, which is a callback function that can be called to request input from the user.
+            When using one of the standard methods, the request will be in the selected language.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskUserName(System.String,System.String)">
+            <summary>
+            Ask for the user name, e.g. for a connection
+            </summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskPassword(System.String,System.String)">
+            <summary>Ask for a password, e.g. for a connection (shows ***)</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskUserNameFirewall(System.String,System.String)">
+            <summary>User name for a firewall</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskPasswordFirewall(System.String,System.String)">
+            <summary>Password for a firewall</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskAccount(System.String,System.String)">
+            <summary>Ask for an account (needed for some FTP servers)</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskTargetDir(System.String,System.String)">
+            <summary>Asks for a local directory (with browse button)</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskUrl(System.String,System.String)">
+            <summary>Asks for an URL</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.AskOther(System.String,System.String,System.String)">
+            <summary>
+            The requested string is none of the default types
+            </summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="text">Override the text default text. Set this to <c>null</c> or an empty string to use the default text. The default text will be translated to the language set in the calling program.</param>
+            <param name="preValue">This string contains the default text presented to the user, set this to <c>string.Empty</c> to have no default text.</param>
+            <returns>The string which the user enters</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.MsgOk(System.String,System.String)">
+            <summary>Shows MessageBox with OK button</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="text">Override the text default text. Set this to <c>null</c> or an empty string to use the default text. The default text will be translated to the language set in the calling program.</param>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.MsgYesNo(System.String,System.String)">
+            <summary>Shows MessageBox with Yes/No buttons</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="text">Override the text default text. Set this to <c>null</c> or an empty string to use the default text. The default text will be translated to the language set in the calling program.</param>
+            <returns><c>true</c> if the user clicked Yes, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:TcPluginBase.FileSystem.FsPrompt.MsgOkCancel(System.String,System.String)">
+            <summary>Shows MessageBox with OK/Cancel buttons</summary>
+            <param name="title">Custom title for the dialog box. If NULL or empty, it will be "Total Commander"</param>
+            <param name="text">Override the text default text. Set this to <c>null</c> or an empty string to use the default text. The default text will be translated to the language set in the calling program.</param>
+            <returns><c>true</c> if the user clicked OK, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.RemoteInfo">
+            <summary><see cref="T:TcPluginBase.FileSystem.RemoteInfo"/> is passed to FsGetFile and FsRenMovFile. It contains details about the remote file being copied.</summary>
+            <remarks>This struct is passed to <see cref="M:TcPluginBase.FileSystem.FsPlugin.GetFile(TcPluginBase.FileSystem.RemotePath,System.String,TcPluginBase.FileSystem.CopyFlags,TcPluginBase.FileSystem.RemoteInfo)"/> and <see cref="M:TcPluginBase.FileSystem.FsPlugin.RenMovFile(TcPluginBase.FileSystem.RemotePath,TcPluginBase.FileSystem.RemotePath,System.Boolean,System.Boolean,TcPluginBase.FileSystem.RemoteInfo)"/> to make it easier for the plugin to copy the file. You can of course also ignore this parameter.</remarks>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemoteInfo.Size">
+            <summary>
+            The remote file size. Useful for a progress indicator.
+            </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemoteInfo.LastWriteTime">
+            <summary>
+            Time stamp of the remote file - should be copied with the file.
+            </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemoteInfo.Attributes">
+            <summary>
+            Attributes of the remote file - should be copied with the file.
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.FileSystem.RemotePath">
+            <summary>
+            A RemotePath always starts with a backslash, then the names returned by FsFindFirst/FsFindNext separated by backslashes.
+            </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.Level">
+            <summary>
+            '\'                 level 0
+            '\segment'          level 1
+            '\segment\segment'  level 2
+            </summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.TrailingSlash">
+            <summary>true if this RemotePath has a trailing slash</summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.Directory">
+            <summary>Returns the directory information for this RemotePath.</summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.FileName">
+            <summary>Returns the file name and extension of this RemotePath.</summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.FileNameWithoutExtension">
+            <summary>Returns the file name of this RemotePath without the extension.</summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.Extension">
+            <summary>Returns the extension of this RemotePath.</summary>
+        </member>
+        <member name="P:TcPluginBase.FileSystem.RemotePath.PathWithoutTrailingSlash">
+            <summary>Returns a new RemotePath consisting of the current Path without trailing slash.</summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.ListerCommand">
+            <summary>
+            Used as parameter type for SendCommand method
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.ListerMessage">
+            <summary>
+            Used as parameter type for ListerPluginEvent callback method
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.ListerResult">
+            <summary>
+            Used as result type for most Lister plugin methods
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.PrintFlags">
+            <summary>
+            Used as parameter type for Print method
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.SearchParameter">
+            <summary>
+            Used as parameter type for SearchText method
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.ShowFlags">
+            <summary>
+            Used as parameter type for Load, LoadNext and SendCommand methods
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.Lister.PrintMargins">
+            <summary>
+            Used as parameter type for Print method
+            </summary>
+        </member>
+        <member name="F:TcPluginBase.PluginDefaultParams.Size">
+            <summary>
+            The size of the structure, in bytes. Later revisions of the plugin interface may add more structure members, and will adjust this size field accordingly.
+            </summary>
+        </member>
+        <member name="F:TcPluginBase.PluginDefaultParams.PluginInterfaceVersionLow">
+            <summary>
+            Low value of plugin interface version. This is the value after the comma, multiplied by 100! Example. For plugin interface version 1.3, the low DWORD is 30 and the high DWORD is 1.
+            </summary>
+        </member>
+        <member name="F:TcPluginBase.PluginDefaultParams.PluginInterfaceVersionHi">
+            <summary>
+            High value of plugin interface version.
+            </summary>
+        </member>
+        <member name="F:TcPluginBase.PluginDefaultParams.DefaultIniName">
+            <summary>
+            Suggested location+name of the ini file where the plugin could store its data.
+            This is a fully qualified path+file name, and will be in the same directory as the wincmd.ini.
+            It's recommended to store the plugin data in this file or at least in this directory,
+            because the plugin directory or the Windows directory may not be writable!
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.PluginPassword.Save(System.String,System.String)">
+            <summary>
+            Save password to password store.
+            </summary>
+            <param name="store"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TcPluginBase.PluginPassword.Load(System.String,System.String@)">
+            <summary>
+            Load password from password store.
+            and automatically prompt the user for MasterPassword.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.PluginPassword.LoadNoUI(System.String,System.String@)">
+            <summary>
+            Load password from password store only if master password has already been entered.
+            Use <see cref="M:TcPluginBase.PluginPassword.Load(System.String,System.String@)"/> to automatically prompt the user for MasterPassword.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.PluginPassword.Copy(System.String,System.String)">
+            <summary>
+            Copy password to new store.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.PluginPassword.Move(System.String,System.String)">
+            <summary>
+            Copy password to new store and delete the source password.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.PluginPassword.Delete(System.String)">
+            <summary>
+            Delete the password of the given store.
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.QuickSearch.ExactNameMatch">
+            <summary>
+            Used as parameter type for MatchGetSetOptions method
+            </summary>
+        </member>
+        <member name="T:TcPluginBase.QuickSearch.MatchOptions">
+            <summary>
+            Used as result type for MatchGetSetOptions method
+            </summary>
+        </member>
+        <member name="F:TcPluginBase.Tools.ErrorDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.Tools.ErrorDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:TcPluginBase.Tools.ErrorDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:TcPluginBase.Tools.TcPluginLoader.GetTcPlugin``1(System.Type)">
+            <summary>
+            This is the TcPluginBase EntryPoint!
+            </summary>
+        </member>
+    </members>
+</doc>
