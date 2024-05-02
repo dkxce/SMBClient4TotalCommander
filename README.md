@@ -3,7 +3,7 @@
 Main Features:     
 ==============     
 - Allow to change standard port (not 445) / non-standard ports
-- [Total Commander](https://www.ghisler.com/) WFX plugin
+- [Total Commander](https://www.ghisler.com/) WFX plugin ([wiki](https://www.ghisler.ch/wiki/index.php/Plugin))
 - Supports [SMBLibrary 1.5.1 SVC Server by dkxce](https://github.com/dkxce/SMBLibrary)
 - Supports Samba / SMB 2.0 (Network Windows File Sharing)
 - Supports Samba / SMB 2.1 (Network Windows File Sharing)
